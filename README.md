@@ -10,9 +10,7 @@
 
 # Author
 
-    Yomei hendra, M.Kom
-    Putri Sakinah, M.TI
-    Zumardi Rahman, M.Kom
+    Yolanda Effendi M.Kom
 
 # References
 
