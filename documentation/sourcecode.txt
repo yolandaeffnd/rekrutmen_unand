@@ -1,0 +1,17 @@
+
+
+        <div style="width: 100%; height: 0; border: 1px solid black; margin: 3px; display:inline-block;"></div>
+                    <div class="mb-3">{!! DNS2D::getBarcodeHTML("$productCode", 'QRCODE') !!}</div>
+            <div class="mb-3">{!! DNS2D::getBarcodeHTML("$productCode", 'DATAMATRIX') !!}</div>
+            <div class="mb-3">{!! DNS1D::getBarcodeHTML("$productCode", 'C39') !!}</div>
+            <div class="mb-3">{!! DNS1D::getBarcodeHTML("$productCode", 'C39+') !!}</div>
+            <div class="mb-3">{!! DNS1D::getBarcodeHTML("$productCode", 'C39E') !!}</div>
+            <div class="mb-3">{!! DNS1D::getBarcodeHTML("$productCode", 'C39E+') !!}</div>
+            <div class="mb-3">{!! DNS1D::getBarcodeHTML("$productCode", 'C93') !!}</div>
+            <div class="mb-3">{!! DNS1D::getBarcodeHTML("$productCode", 'S25') !!}</div>
+            <div class="mb-3">{!! DNS1D::getBarcodeHTML("$productCode", 'S25+') !!}</div>
+            <div class="mb-3">{!! DNS1D::getBarcodeHTML("$productCode", 'I25') !!}</div>
+            <div class="mb-3">{!! DNS1D::getBarcodeHTML("$productCode", 'I25+') !!}</div>
+            <div class="mb-3">{!! DNS1D::getBarcodeHTML("$productCode", 'C128') !!}</div>
+            <div class="mb-3">{!! DNS1D::getBarcodeHTML("$productCode", 'C128A') !!}</div>
+            <div class="mb-3">{!! DNS1D::getBarcodeHTML("$productCode", 'C128B') !!}</div>
