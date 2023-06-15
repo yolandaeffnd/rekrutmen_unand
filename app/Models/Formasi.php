@@ -14,6 +14,12 @@ class Formasi extends Model
         return $this->belongsTo(Unit::class, 'id_unit');
     }
 
+
+    public function jenisformasi()
+    {
+        return $this->belongsTo(Jenisformasi::class, 'jenis_fromasi');
+    }
+
     public function formasi_pendidikans()
     {
         return $this->belongsToMany(Pendidikan::class, 'formasi_has_pendidikans', 'id_formasi', 'id_pendidikan');

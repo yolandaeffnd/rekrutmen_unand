@@ -106,16 +106,23 @@ body {
 </style>
 <div class="card" style="width: 70rem;">
   <div class="card-body">
-  <h5 class="text-bold jobpost_name" style="color:#28a745;">JUNIOR ENGINEER SOFTWARE DEVELOPMENT</h5>
+  <h5 class="text-bold jobpost_name" style="color:#28a745;">{{ $formasi }}</h5>
     
-  <p class="company_name" style="margin:0px">Departemen Teknologi Informasi Universitas Andalas</p>
-  <p><medium>Tanggal Melamar : 19-05-2023</medium></p>
+  <p class="company_name" style="margin:0px">{{ $lokasipenempatan }}</p>
+  <p><medium>Tanggal Melamar : {{ $tgl_melamar }}</medium></p>
 
+  @if($status_peserta==null)
     <ul class="list-ic vertical">
             <li><span>1</span>	<a href="#">Administrasi : </a><a href="#" style="color:red">Proses</a> </li>
             <li><span>2</span>	<a href="#">Tes Keterampilan : </a><a href="#" style="color:green">-</a></li>
             <li><span>3</span>	<a href="#">Wawancara : </a><a href="#" style="color:blue">-</a></li>
-        </ul>
+    </ul>
+    @else
+    <ul class="list-ic vertical">
+            <li><span>1</span>	<a href="#">Administrasi : </a><a href="#" style="color:red">Proses</a> </li>
+            
+    </ul>
+    @endif
   </div>
 </div>
 

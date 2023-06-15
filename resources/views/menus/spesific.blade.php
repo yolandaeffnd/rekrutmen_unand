@@ -55,6 +55,14 @@
                     'sub-sub-menu' => [],
                 ],
                 [
+                    'name' => 'Jenis Formasi',
+                    'url' => route('jenisformasi.index'),
+                    'url-open' => request()->is('apps/master/jenisformasi*') ? 'menu-open' : '',
+                    'url-active' => request()->is('apps/master/jenisformasi*') ? 'active' : '',
+                    'permissions' => ['master-formasi'],
+                    'sub-sub-menu' => [],
+                ],
+                [
                     'name' => 'Formasi',
                     'url' => route('formasi.index'),
                     'url-open' => request()->is('apps/master/formasi*') ? 'menu-open' : '',

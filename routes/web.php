@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\DeveloperFeature\{RoleController, ArtisanController};
-use App\Http\Controllers\{FormasiController, RekrutmenCon, WebPageCon};
+use App\Http\Controllers\{FormasiController, RekrutmenCon, WebPageCon, JenisformasiController};
 use App\Http\Controllers\Articles\{ArticleCategoriCon, ArticleCon};
 use App\Http\Controllers\GudangData\{AjaxCon};
 use App\Http\Controllers\Personal\{AkunController, ProfileController};
@@ -73,6 +73,11 @@ Route::group(['prefix' => 'apps'], function () {
         //ROLE TASK
         Route::resource('/manage/user', UserController::class)->middleware('can:manage-user');
         Route::resource('/master/formasi', FormasiController::class)->middleware('can:master-formasi');
+        //kelola data jenis formasi
+        Route::get('/master/jenisformasi', [JenisformasiController::class, 'index'])->name('jenisformasi.index');
+        Route::get('/master/jenisformasi-create', [JenisformasiController::class, 'create'])->name('jenisformasi-create');
+        Route::post('/jenisformasi-store', [JenisformasiController::class, 'store'])->name('jenisformasi-store');
+
         //kelola pelamar
         Route::resource('/rekrutmen/pelamar', RekrutmenCon::class)->middleware('can:rekrutmen-pelamar');
         Route::get('/rekrutmen/datatable/pelamar', [RekrutmenCon::class, 'index_datatable'])->name('pelamar.datatable');
@@ -80,6 +85,7 @@ Route::group(['prefix' => 'apps'], function () {
         //kelola artikel/berita/pengumuman
         Route::resource('/article', ArticleCon::class)->middleware('can:article');
         Route::resource('/article-kategori', ArticleCategoriCon::class)->middleware('can:article');
+        
     });
 
     //LEVEL DEVELOPER TASK
