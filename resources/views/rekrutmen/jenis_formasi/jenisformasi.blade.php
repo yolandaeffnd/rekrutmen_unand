@@ -38,9 +38,10 @@
                         <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">ID</th>
+                                       
                                         <th scope="col">Jenis Formasi</th>
                                         <th scope="col">Tahapan</th>
+                                        <th scope="col">Act</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,7 +52,7 @@
                                         
                                             <tr>
                                                 <th scope="row">{{ $key + 1 }}</th>
-                                                <td>{{ $js->id }}</td>
+                                               
                                                 <td>{{ $js->nama_jenis }}</td>
                                                 <td>
                                                 @php
@@ -66,7 +67,18 @@
 
                                                 @endforeach
                                                 </td>
+                                                <td>
+                                                    <a href="{{ route('jenisformasi-edit', $js['id']) }}"
+                                                        class="btn btn-warning btn-xs"> <i
+                                                            class="far fa-edit icon-size"></i></a>
+                                                    {!! Form::open(['method' => 'DELETE', 'route' => ['jenisformasi-destroy', $js->id], 'style' => 'display:inline']) !!}
+                                                    {{ Form::button('<i class="far fa-trash-alt icon-size"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs show_confirm']) }}
+                                                    {!! Form::close() !!}
+
+                                                    
+                                                </td>
                                             </tr>
+                                           
                                         @endforeach
                                     @else
                                         <tr>

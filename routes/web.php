@@ -76,8 +76,10 @@ Route::group(['prefix' => 'apps'], function () {
         //kelola data jenis formasi
         Route::get('/master/jenisformasi', [JenisformasiController::class, 'index'])->name('jenisformasi.index');
         Route::get('/master/jenisformasi-create', [JenisformasiController::class, 'create'])->name('jenisformasi-create');
-        Route::post('/jenisformasi-store', [JenisformasiController::class, 'store'])->name('jenisformasi-store');
-
+        Route::post('/master/jenisformasi-store', [JenisformasiController::class, 'store'])->name('jenisformasi-store');
+        Route::get('/master/jenisformasi-edit/{id}', [JenisformasiController::class, 'edit'])->name('jenisformasi-edit');
+        Route::put('/master/jenisformasi-update/{id}', [JenisformasiController::class, 'update'])->name('jenisformasi-update');
+        Route::delete('/master/jenisformasi-destroy/{id}', [JenisformasiController::class, 'destroy'])->name('jenisformasi-destroy');
         //kelola pelamar
         Route::resource('/rekrutmen/pelamar', RekrutmenCon::class)->middleware('can:rekrutmen-pelamar');
         Route::get('/rekrutmen/datatable/pelamar', [RekrutmenCon::class, 'index_datatable'])->name('pelamar.datatable');

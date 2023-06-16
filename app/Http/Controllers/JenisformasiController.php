@@ -66,9 +66,10 @@ class JenisformasiController extends Controller
      * @param  \App\Models\Jenisformasi  $jenisformasi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Jenisformasi $jenisformasi)
+    public function edit($id)
     {
-        //
+        $jenis_formasi =  Jenisformasi::where('id', $id)->firstOrFail();
+        return view('rekrutmen.jenis_formasi.jenisformasi-edit', compact('jenis_formasi'));
     }
 
     /**
@@ -78,9 +79,18 @@ class JenisformasiController extends Controller
      * @param  \App\Models\Jenisformasi  $jenisformasi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Jenisformasi $jenisformasi)
+    public function update(Request $request, $id)
     {
-        //
+      
+        $str_json = json_encode($request->tahapan);
+        $data           = Jenisformasi::find($id);
+        $data->nama_jenis    = $request->nama_jenis;
+        $data->tahapan  = $str_json;
+        $data->save();
+    
+        return redirect(route('jenisformasi.index'))->with('success', 'Data Berhasil Diedit');
+
+
     }
 
     /**
@@ -89,8 +99,12 @@ class JenisformasiController extends Controller
      * @param  \App\Models\Jenisformasi  $jenisformasi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Jenisformasi $jenisformasi)
+    public function destroy(Request $request, $id)
     {
-        //
+       
+            Jenisformasi::find($id)->delete();
+        // dd($request->level);
+
+        return redirect(route('jenisformasi.index'))->with('success', 'Data Berhasil Dihapus');
     }
 }
