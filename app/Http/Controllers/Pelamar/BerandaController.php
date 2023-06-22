@@ -43,45 +43,93 @@ class BerandaController extends Controller
         $tampung = Jenisformasi::where('id',$id_jenis)->first();
         $thp_peserta = json_decode($tampung->tahapan);
 
+        $jumlah = count($thp_peserta)- 2;
+        $tahapan_peserta = array();
+        for($j=0;$j<$jumlah;$j++){
+            $tahapan_peserta[] = $thp_peserta[$j];
+        }
+
         //mendapatkan status peserta
         // $tampung_status = json_decode($user->status);
         //status peserta
         $status_peserta = $user->status;
-
+        $status_his = $user->status_history;
+        // dd($status_his);
         $i = 0;
       
             foreach($thp_peserta as $tp)
             {
-                if($status_peserta == $tp->subject)
-                {
-                    $status_val = $tp->subject;
+                if($status_his != null){
+                    if($status_his == $tp->subject)
+                    {
+                        $status_val = $tp->subject;
+                    }else{
+                        $status_val = null;
+                    }
                 }else{
-                    $status_val = null;
+                    if($status_peserta == $tp->subject)
+                    {
+                        $status_val = $tp->subject;
+                    }else{
+                        $status_val = null;
+                    }
                 }
+                
+
+
             
-
-                if($i==0 &&  $status_val != null)
+                if($status_peserta == "Gagal" && $status_val!=null)
                 {
-                    $status_arr[$i] = "Proses";
-                }else if($i!=0 && !empty($status_val)){
-                       for($j=0;$j<$i;$j++)
-                       {
+                    // $jum = $jumlah-1;
+                    for($j=0;$j<$i;$j++)
+                    {
                             $status_arr[$j] = "Lulus";
-                       } 
+                    } 
+                    
+                    $status_arr[$i] = "Gagal";
+                    
+                }else if($status_peserta == "Lulus"){
+                    $jum = $jumlah-1;
+                    for($j=0;$j<$jum;$j++)
+                    {
+                            $status_arr[$j] = "Lulus";
+                    } 
+                    
+                    $status_arr[$jum] = "Lulus";
+                }else{
+                    if($i==0 &&  $status_val != null)
+                        {
+                            for($j=1;$j<$jumlah;$j++)
+                            {
+                                    $status_arr[$j] = "-";
+                            }
+                            $status_arr[$i] = "Proses";
+                        }else if($i!=0 && !empty($status_val)){
+                            for($j=0;$j<$i;$j++)
+                            {
+                                    $status_arr[$j] = "Lulus";
+                            } 
 
-                       $status_arr[$i] = "Proses";
-                }else if($i!=0 && empty($status_val)){
-                    $status_arr[$i] = "-";
+                            $status_arr[$i] = "Proses";
+                        }else if(empty($status_val)){
+                            $status_arr[$i] = "-";
+                        }
+
                 }
-
+                
                 $i++;
             
         }
+        //   dd($status_val);
+        // if($status_val == null)
+        // {
+        //     $state = 0;
+        // }
 
-        dd($status_arr);
+      
         
         //echo "home Pelamar";
 
-        return view('pelamar.statuspelamar', compact('user','status_peserta','formasi','tgl_melamar','lokasipenempatan','thp_peserta','status_arr'));
+        return view('pelamar.statuspelamar2', compact('user','status_peserta','formasi','tgl_melamar','lokasipenempatan','tahapan_peserta','status_arr'));
     }
 }

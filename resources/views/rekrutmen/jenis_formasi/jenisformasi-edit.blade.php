@@ -53,10 +53,13 @@
                                 </tr>
                                 @php
                                  
-                                    $tampung = json_decode($jenis_formasi->tahapan);
-                                              $i=0;     
+                                    $var_tampung = json_decode($jenis_formasi->tahapan);
+                                    
+                                    $remove = array_pop($var_tampung); 
+                                    $remove = array_pop($var_tampung); 
+                                    $i = 0;
                                 @endphp
-                                @foreach($tampung as $tp)
+                                @foreach($var_tampung as $tp)
                                 @if($i==0)
                                 <tr>
                                     <td><input type="text" name="tahapan[{{$i}}][subject]" value="{{$tp->subject}}" placeholder="Enter subject" class="form-control" />
@@ -72,7 +75,6 @@
                                     </td>
                                     <td><button type="button" class="btn btn-outline-danger remove-input-field">Hapus</button></td>
                                 </tr>
-
                                 @endif
                                 @php 
                                     $i++;
@@ -108,7 +110,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
-    var i = 0;
+    var i = "<?php echo $i; ?>";;
     $("#dynamic-ar").click(function () {
         ++i;
         $("#dynamicAddRemove").append('<tr><td><input type="text" name="tahapan[' + i +

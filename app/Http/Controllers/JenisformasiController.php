@@ -95,8 +95,9 @@ class JenisformasiController extends Controller
         $arr[]['subject'] = "Lulus";
         // array_push($stack, "apple", "raspberry");
         $tahapan_array=array_merge($t_arr,$arr);
-        // dd($a2);
+        
         $str_json = json_encode($tahapan_array); 
+       
         $data           = Jenisformasi::find($id);
         $data->nama_jenis    = $request->nama_jenis;
         $data->tahapan  = $str_json;

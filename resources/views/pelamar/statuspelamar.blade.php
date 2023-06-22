@@ -103,6 +103,26 @@ body {
   class: focus-ring,
   values: map-loop($theme-colors-rgb, rgba-css-var, "$key", "focus-ring")
 ),
+
+li:before {
+  background-color: #c00;
+  width: 2px;
+  content: '';
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 5px;
+}
+
+li {
+  /* You need to turn on relative positioning so the line is placed relative to the item rather than absolutely on the page */
+  position: relative;
+
+  /* Use padding to space things out rather than margins as the line would get broken up otherwise */
+  margin: 0;
+  padding-bottom: 1em;
+  padding-left: 20px;
+}
 </style>
 <div class="card" style="width: 70rem;">
   <div class="card-body">
@@ -112,11 +132,11 @@ body {
   <p><medium>Tanggal Melamar : {{ $tgl_melamar }}</medium></p>
   @php 
     $i = 1;
-    $j = 0;
+    $j = 1;
   @endphp
  
-  <ul class="list-ic vertical">
-  @foreach($thp_peserta as $tp)
+  <ul class="list-ic horizontal">
+  @foreach($tahapan_peserta as $tp)
             <li><span>{{$i++;}}</span>	<a href="#">{{$tp->subject}} : </a>
             @if($status_arr[$j]=="Lulus")
 
