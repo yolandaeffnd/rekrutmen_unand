@@ -49,7 +49,8 @@
                                     <th>Action</th>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" name="tahapan[0][subject]" placeholder="Enter subject" class="form-control" />
+                                    <td>
+                                        <input type="text" name="tahapan[3][subject]" placeholder="Enter subject" class="form-control" />
                                     </td>
                                     <td><button type="button" name="add" id="dynamic-ar" class="btn btn-outline-primary">Tambah</button></td>
                                 </tr>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Pelamar;
 use App\Http\Controllers\Controller;
 use App\Models\{Registrasi};
 use App\Models\{User};
-use App\Models\{Formasi};
+use App\Models\{Formasi, Jenisformasi};
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,10 +38,50 @@ class BerandaController extends Controller
         //formasi penempatan dan posisi
         $formasi = $formasipelamar->jabatan;
         $lokasipenempatan = $formasipelamar->lokasi_penempatan;
+        $id_jenis = $formasipelamar->jenis_formasi;
 
+        $tampung = Jenisformasi::where('id',$id_jenis)->first();
+        $thp_peserta = json_decode($tampung->tahapan);
+
+        //mendapatkan status peserta
+        // $tampung_status = json_decode($user->status);
         //status peserta
         $status_peserta = $user->status;
+
+        $i = 0;
+      
+            foreach($thp_peserta as $tp)
+            {
+                if($status_peserta == $tp->subject)
+                {
+                    $status_val = $tp->subject;
+                }else{
+                    $status_val = null;
+                }
+            
+
+                if($i==0 &&  $status_val != null)
+                {
+                    $status_arr[$i] = "Proses";
+                }else if($i!=0 && !empty($status_val)){
+                       for($j=0;$j<$i;$j++)
+                       {
+                            $status_arr[$j] = "Lulus";
+                       } 
+
+                       $status_arr[$i] = "Proses";
+                }else if($i!=0 && empty($status_val)){
+                    $status_arr[$i] = "-";
+                }
+
+                $i++;
+            
+        }
+
+        dd($status_arr);
+        
         //echo "home Pelamar";
-        return view('pelamar.statuspelamar', compact('user','status_peserta','formasi','tglmelamar','tgl_melamar','lokasipenempatan'));
+
+        return view('pelamar.statuspelamar', compact('user','status_peserta','formasi','tgl_melamar','lokasipenempatan','thp_peserta','status_arr'));
     }
 }

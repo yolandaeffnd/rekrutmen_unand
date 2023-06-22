@@ -110,8 +110,25 @@ body {
     
   <p class="company_name" style="margin:0px">{{ $lokasipenempatan }}</p>
   <p><medium>Tanggal Melamar : {{ $tgl_melamar }}</medium></p>
+  @php 
+    $i = 1;
+    $j = 0;
+  @endphp
+ 
+  <ul class="list-ic vertical">
+  @foreach($thp_peserta as $tp)
+            <li><span>{{$i++;}}</span>	<a href="#">{{$tp->subject}} : </a>
+            @if($status_arr[$j]=="Lulus")
 
-  @if($status_peserta==null)
+            <a href="#" style="color:green">{{$status_arr[$j]}}</a> </li>
+            @else
+            <a href="#" style="color:red">{{$status_arr[$j]}}</a> </li>
+            @endif
+
+            @php $j++; @endphp
+        @endforeach   
+    </ul>
+  <!-- @if($status_peserta==null)
     <ul class="list-ic vertical">
             <li><span>1</span>	<a href="#">Administrasi : </a><a href="#" style="color:red">Proses</a> </li>
             <li><span>2</span>	<a href="#">Tes Keterampilan : </a><a href="#" style="color:green">-</a></li>
@@ -122,7 +139,7 @@ body {
             <li><span>1</span>	<a href="#">Administrasi : </a><a href="#" style="color:red">Proses</a> </li>
             
     </ul>
-    @endif
+    @endif -->
   </div>
 </div>
 
