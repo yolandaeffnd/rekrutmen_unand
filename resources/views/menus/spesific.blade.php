@@ -27,6 +27,14 @@
                     'permissions' => ['article'],
                     'sub-sub-menu' => [],
                 ],
+                [
+                    'name' => 'Notifikasi',
+                    'url' => route('notifikasi.index'),
+                    'url-open' => request()->is('apps/notifikasi*') ? 'menu-open' : '',
+                    'url-active' => request()->is('apps/notifikasi*') ? 'active' : '',
+                    'permissions' => ['article'],
+                    'sub-sub-menu' => [],
+                ],
             ],
         ],
         //Menu Master Data
@@ -70,6 +78,7 @@
                     'permissions' => ['master-formasi'],
                     'sub-sub-menu' => [],
                 ],
+                
             ],
         ],
         //Menu Kelola Pelamar

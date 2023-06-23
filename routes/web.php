@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\DeveloperFeature\{RoleController, ArtisanController};
-use App\Http\Controllers\{FormasiController, RekrutmenCon, WebPageCon, JenisformasiController};
+use App\Http\Controllers\{FormasiController, RekrutmenCon, WebPageCon, JenisformasiController, NotifController};
 use App\Http\Controllers\Articles\{ArticleCategoriCon, ArticleCon};
 use App\Http\Controllers\GudangData\{AjaxCon};
 use App\Http\Controllers\Personal\{AkunController, ProfileController};
@@ -87,6 +87,8 @@ Route::group(['prefix' => 'apps'], function () {
         //kelola artikel/berita/pengumuman
         Route::resource('/article', ArticleCon::class)->middleware('can:article');
         Route::resource('/article-kategori', ArticleCategoriCon::class)->middleware('can:article');
+        //kelola data notifkasi
+        Route::get('/notifikasi', [NotifController::class, 'index'])->name('notifikasi.index');
         
     });
 
