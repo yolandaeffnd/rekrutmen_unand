@@ -80,15 +80,19 @@ Route::group(['prefix' => 'apps'], function () {
         Route::get('/master/jenisformasi-edit/{id}', [JenisformasiController::class, 'edit'])->name('jenisformasi-edit');
         Route::put('/master/jenisformasi-update/{id}', [JenisformasiController::class, 'update'])->name('jenisformasi-update');
         Route::delete('/master/jenisformasi-destroy/{id}', [JenisformasiController::class, 'destroy'])->name('jenisformasi-destroy');
+        //kelola data notifkasi
+        Route::get('/notifikasi', [NotifController::class, 'index'])->name('notifikasi.index');
+        Route::get('/notifikasi-create', [NotifController::class, 'create'])->name('notifikasi.create');
         //kelola pelamar
         Route::resource('/rekrutmen/pelamar', RekrutmenCon::class)->middleware('can:rekrutmen-pelamar');
         Route::get('/rekrutmen/datatable/pelamar', [RekrutmenCon::class, 'index_datatable'])->name('pelamar.datatable');
         Route::post('/rekrutmen/zip/pelamar', [RekrutmenCon::class, 'zipCreate'])->name('compress-files');
+       
         //kelola artikel/berita/pengumuman
         Route::resource('/article', ArticleCon::class)->middleware('can:article');
         Route::resource('/article-kategori', ArticleCategoriCon::class)->middleware('can:article');
-        //kelola data notifkasi
-        Route::get('/notifikasi', [NotifController::class, 'index'])->name('notifikasi.index');
+       
+      
         
     });
 

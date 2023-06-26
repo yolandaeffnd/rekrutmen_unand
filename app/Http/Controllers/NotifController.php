@@ -1,7 +1,7 @@
 <?php
 
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\{Notif, Formasi, Jenisformasi};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Auth, Validator};
@@ -16,9 +16,9 @@ class NotifController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $notif = Notif::paginate(2);
+        $notifs = Notif::paginate(2);
 
-        return view('notifikasi.notifikasi-list', compact('user','notif'));
+        return view('notifikasi.notifikasi-index', compact('user','notifs'));
 
     }
 
@@ -30,9 +30,9 @@ class NotifController extends Controller
     public function create()
     {
         $user = Auth::user();
-        $notif = Notif::all();
+        $formasis = Formasi::all();
 
-        return view('notifikasi.notifikasi-create', compact('user', 'notif'));
+        return view('notifikasi.notifikasi-create', compact('user', 'formasis'));
     }
 
     /**
