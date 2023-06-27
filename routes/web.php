@@ -8,6 +8,7 @@ use App\Http\Controllers\Personal\{AkunController, ProfileController};
 use App\Http\Controllers\ManageUser\{UserController};
 use App\Http\Controllers\Pelamar\{BerandaController, PendaftaranController};
 use App\Models\Article;
+use App\Models\{Jenisformasi, Formasi};
 use App\Notifications\{Profile};
 use Illuminate\Support\Facades\{Auth, Route};
 
@@ -83,6 +84,22 @@ Route::group(['prefix' => 'apps'], function () {
         //kelola data notifkasi
         Route::get('/notifikasi', [NotifController::class, 'index'])->name('notifikasi.index');
         Route::get('/notifikasi-create', [NotifController::class, 'create'])->name('notifikasi.create');
+        Route::get('/getTahapan/{id}', function ($id) {
+          
+            $formasipelamar = Formasi::where('id',$id)->first();
+        
+            $id_jenis = $formasipelamar->jenis_formasi;
+           
+            $tampung = Jenisformasi::where('id',$id_jenis)->first();
+            $thp_peserta = json_decode($tampung->tahapan);
+            foreach($thp_peserta as $tp)
+            {
+                $tahapan[] = $tp->subject;
+            }
+            return response()->json($tahapan);
+
+          
+        });
         //kelola pelamar
         Route::resource('/rekrutmen/pelamar', RekrutmenCon::class)->middleware('can:rekrutmen-pelamar');
         Route::get('/rekrutmen/datatable/pelamar', [RekrutmenCon::class, 'index_datatable'])->name('pelamar.datatable');

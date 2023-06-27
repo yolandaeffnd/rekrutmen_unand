@@ -35,6 +35,10 @@ class NotifController extends Controller
         return view('notifikasi.notifikasi-create', compact('user', 'formasis'));
     }
 
+
+  
+
+    
     /**
      * Store a newly created resource in storage.
      *
