@@ -136,30 +136,31 @@ li {
   @endphp
  
   <ul class="list-ic horizontal">
-  @foreach($tahapan_peserta as $tp)
-            <li><span>{{$i++;}}</span>	<a href="#">{{$tp->subject}} : </a>
-            @if($status_arr[$j]=="Lulus")
+            
+            @if($status_peserta==0)
+            <li><span>{{$i++;}}</span>	<a href="#">Seleksi Administrasi :</a>
+            <a href="#" style="color:green">Proses</a> </li>
+            <li><span>{{$i++;}}</span>	<a href="#">Seleksi Kompetensi Dasar :</a>
+            <a href="#" style="color:green">-</a> </li>
+            <li><span>{{$i++;}}</span>	<a href="#">Seleksi Kompetensi Bidang :</a>
+              <a href="#" style="color:green">-</a> </li>
 
-            <a href="#" style="color:green">{{$status_arr[$j]}}</a> </li>
-            @else
-            <a href="#" style="color:red">{{$status_arr[$j]}}</a> </li>
             @endif
 
-            @php $j++; @endphp
-        @endforeach   
+            @if($status_peserta==1)
+            <li><span>{{$i++;}}</span>	<a href="#">Seleksi Administrasi :</a>
+            <a href="#" style="color:green">Lulus</a> </li>
+            <li><span>{{$i++;}}</span>	<a href="#">Seleksi Kompetensi Dasar :</a>
+            <a href="#" style="color:green">Proses</a> </li>
+            <li><span>{{$i++;}}</span>	<a href="#">Seleksi Kompetensi Bidang :</a>
+            <a href="#" style="color:green">-</a> </li>
+            @endif
+
+
+        
+       
     </ul>
-  <!-- @if($status_peserta==null)
-    <ul class="list-ic vertical">
-            <li><span>1</span>	<a href="#">Administrasi : </a><a href="#" style="color:red">Proses</a> </li>
-            <li><span>2</span>	<a href="#">Tes Keterampilan : </a><a href="#" style="color:green">-</a></li>
-            <li><span>3</span>	<a href="#">Wawancara : </a><a href="#" style="color:blue">-</a></li>
-    </ul>
-    @else
-    <ul class="list-ic vertical">
-            <li><span>1</span>	<a href="#">Administrasi : </a><a href="#" style="color:red">Proses</a> </li>
-            
-    </ul>
-    @endif -->
+ 
   </div>
 </div>
 

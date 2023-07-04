@@ -76,6 +76,12 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->username);
         $user->id_unit = $request->id_unit;
+        if($request->level=="pelamar")
+        {
+            $user->status = "Administrasi";
+        }else{
+            $user->status = Null;   
+        }
         // $user->id_sub_division = $request->id_sub_division;
         // $user->id_major = $request->id_major;
         // $user->id_study_program = $request->id_study_program;

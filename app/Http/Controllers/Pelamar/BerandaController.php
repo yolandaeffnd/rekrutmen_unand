@@ -132,4 +132,31 @@ class BerandaController extends Controller
 
         return view('pelamar.statuspelamar2', compact('user','status_peserta','formasi','tgl_melamar','lokasipenempatan','tahapan_peserta','status_arr'));
     }
+
+
+    public function statuspelamar_sementara()
+    {
+        
+        $user = Auth::user();
+      
+        $id_formasi = Registrasi::where('id_user', $user->id)->first();
+
+        $idf = $id_formasi->id_formasi;
+        //tgl melamar
+        $tglmelamar = $id_formasi->waktu_dikirim;
+        $tgl_melamar = date("Y-m-d",strtotime($tglmelamar));
+        
+        $formasipelamar = Formasi::where('id',$idf)->first();
+        //formasi penempatan dan posisi
+        $formasi = $formasipelamar->jabatan;
+        $lokasipenempatan = $formasipelamar->lokasi_penempatan;
+       
+
+         //mendapatkan status peserta
+        // $tampung_status = json_decode($user->status);
+        //status peserta
+        $status_peserta = $user->status;
+        
+        return view('pelamar.statuspelamar', compact('user','status_peserta','formasi','tgl_melamar','lokasipenempatan'));
+    }
 }

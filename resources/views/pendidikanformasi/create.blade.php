@@ -32,41 +32,38 @@
                             {{ z_alert('danger', false, $errors->all()) }}
                         @endif
                         <div class="col-md-6">
-                            <form action="{{ route('formasi.store')}}" method="POST">
+                            <form action="{{ route('formasipendidikan-store') }}" method="POST">
                        
                                 @csrf
 
-                                <select class="form-control" name='periode'>
-                                    <option selected="selected" disabled hidden>-- Selected Periode --</option>
-                                    @foreach($periodes as $i)
-                                        <option value="{{$i->kode}}">{{$i->kode}} - {{$i->name}}</option>
-                                    @endforeach
+                            
+                                <div class="mb-3">
+                                  <label class="form-label">Formasi</label>
+                                  <select class="form-control" name="id_formasi">
+                                      <option value>- Pilih -</option>
+                                      @foreach ($formasis as $key => $formasisJabatan)
+                                          {{-- {{print_r($userRole)}} --}}
+                                          <option value="{{ $key }}"
+                                              {{ $key == old('id_formasi') ? 'selected' : '' }}>{{ $formasisJabatan }}
+                                          </option>
+                                      @endforeach
+                                  </select>
+                              </div>
+                              
+                              <div class="form-group mb-3">
+                                <label for="select2Multiple">Multiple Tags</label>
+                                <select class="select2-multiple form-control" name="tags[]" multiple="multiple"
+                                  id="select2Multiple">
+                                  @foreach ($pendidikan as $key => $pendidikanName)
+                                          {{-- {{print_r($userRole)}} --}}
+                                          <option value="{{ $key }}"
+                                              {{ $key == old('id_pendidikan') ? 'selected' : '' }}>{{ $pendidikanName }}
+                                          </option>
+                                      @endforeach         
                                 </select>
-                                <br>
-                                <select class="form-control" name='unit'>
-                                    <option selected="selected" disabled hidden>-- Selected Unit --</option>
-                                    @foreach($units as $i)
-                                        <option value="{{$i->id}}">{{$i->name}}</option>
-                                    @endforeach
-                                </select>
-                                <br>
-                                <input class="form-control" type="text" name="jabatan" placeholder="Jabatan"><br>
-                                <input class="form-control" type="text" name="lokasi_penempatan" placeholder="Lokasi Penempatan"><br>
-                                <select class="form-control" name='kode_penempatan'>
-                                    <option selected="selected" disabled hidden>-- Selected Penempatan --</option>
-                                    @foreach($prodis as $i)
-                                        <option value="{{$i->kode_prodi}}">{{$i->nama_prodi}}</option>
-                                    @endforeach
-                                </select>
-                                <br>
-                                <select class="form-control" name='jenis_formasi'>
-                                    <option selected="selected" disabled hidden>-- Selected Jenis Formasi --</option>
-                                    @foreach($jenisFormasi as $i)
-                                        <option value="{{$i->id}}">{{$i->nama_jenis}}</option>
-                                    @endforeach
-                                </select>
-                                <br>
-                                <input class="form-control" type="date" name="kebutuhan"><br>
+                              </div>
+
+
                                 <div class="mb-3">
                                     <input type="submit" name="submit" value="Save" class="btn btn-primary">
                                 </div>

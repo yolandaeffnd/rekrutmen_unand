@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\DeveloperFeature\{RoleController, ArtisanController};
-use App\Http\Controllers\{FormasiController, RekrutmenCon, WebPageCon, JenisformasiController, NotifController};
+use App\Http\Controllers\{FormasiController, RekrutmenCon, WebPageCon, JenisformasiController, NotifController, FormasiPendidikanController};
 use App\Http\Controllers\Articles\{ArticleCategoriCon, ArticleCon};
 use App\Http\Controllers\GudangData\{AjaxCon};
 use App\Http\Controllers\Personal\{AkunController, ProfileController};
@@ -108,6 +108,12 @@ Route::group(['prefix' => 'apps'], function () {
         //kelola artikel/berita/pengumuman
         Route::resource('/article', ArticleCon::class)->middleware('can:article');
         Route::resource('/article-kategori', ArticleCategoriCon::class)->middleware('can:article');
+
+         //pendidikan formasi
+         Route::get('/master/pendidikan-list', [FormasiPendidikanController::class, 'index'])->name('pendidikan-list');
+         Route::get('/master/formasipendidikan-create', [FormasiPendidikanController::class, 'create'])->name('formasipendidikan-create');
+         Route::post('/master/formasipendidikan-store', [FormasiPendidikanController::class, 'store'])->name('formasipendidikan-store');
+         Route::delete('/master/formasipendidikan-destroy/{id}', [FormasiPendidikanController::class, 'destroy'])->name('formasipendidikan-destroy');
        
       
         
@@ -133,6 +139,7 @@ Route::group(['prefix' => 'apps'], function () {
         Route::group(['middleware' => ['auth', 'verified']], function () {
             Route::get('/beranda', [BerandaController::class, 'index'])->name('dashboard-pelamar');
             Route::get('/statuspelamar', [BerandaController::class, 'statuspelamar'])->name('status-pelamar');
+            // Route::get('/statuspelamar', [BerandaController::class, 'statuspelamar_sementara'])->name('status-pelamar');
             Route::group(['middleware' => ['registrasi.check']], function () {
                 //route reg start
                 Route::post('/reg', [PendaftaranController::class, 'regStart'])->name('reg-start');

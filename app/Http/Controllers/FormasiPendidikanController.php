@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Formasi, Unit, PeriodePenerimaan, Prodi, Jenisformasi};
 use Illuminate\Http\Request;
+use App\Models\FormasiPendidikan;
+use App\Models\{Formasi, Pendidikan};
 use Illuminate\Support\Facades\Auth;
 
-class FormasiController extends Controller
+class FormasiPendidikanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +16,11 @@ class FormasiController extends Controller
      */
     public function index()
     {
-        $formasis = Formasi::with('formasi_pendidikans')->get();
-
+        
+        $f_pendidikan = FormasiPendidikan::all();
         // dd($formasis);
-        return view('rekrutmen.formasi.formasi', compact('formasis'));
+        // $f_pendidkan= Formasi::with('formasis','pendidikans')->get();
+        return view('pendidikanformasi.list', compact('f_pendidikan'));
     }
 
     /**
@@ -28,11 +30,10 @@ class FormasiController extends Controller
      */
     public function create()
     {
-        $units = Unit::all();
-        $periodes = PeriodePenerimaan::all();
-        $prodis = Prodi::all();
-        $jenisFormasi = Jenisformasi::all();
-        return view('rekrutmen.formasi.formasi-create',compact('units','periodes','prodis','jenisFormasi'));
+       
+        $formasis       = Formasi::pluck('jabatan', 'id')->all();
+        $pendidikan       = Pendidikan::pluck('name', 'id')->all();
+        return view('pendidikanformasi.create', compact('formasis','pendidikan'));
     }
 
     /**
@@ -43,18 +44,24 @@ class FormasiController extends Controller
      */
     public function store(Request $request)
     {
-        $formasis = new Formasi();
-        $formasis->kode_periode_penerimaan = $request->periode;
-        $formasis->id_unit = $request->unit;
-        $formasis->jabatan = $request->jabatan;
-        $formasis->lokasi_penempatan = $request->lokasi_penempatan;
-        $formasis->kode_penempatan = $request->kode_penempatan;
-        $formasis->jenis_formasi = $request->jenis_formasi;
-        $formasis->kebutuhan = $request->kebutuhan;
-        $formasis->save();
+       
+      
+        $pendidikan =  $request->tags;
+        $idformasi =  $request->id_formasi;
+        // dd($pendidikan);
 
-        $formasis = Formasi::with('formasi_pendidikans')->get();
-        return view('rekrutmen.formasi.formasi',compact('formasis'));
+        foreach($pendidikan as $key => $pd)
+        {
+            $data = new FormasiPendidikan();
+
+            $data->id_formasi = $idformasi;
+            $data->id_pendidikan = $pd;
+            $data->save();
+
+        }
+       
+
+        return redirect()->route('formasipendidikan-list')->with('success', 'Post created successfully.');
     }
 
     /**
@@ -97,8 +104,12 @@ class FormasiController extends Controller
      * @param  \App\Models\Formasi  $formasi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Formasi $formasi)
+    public function destroy(Request $request, $id)
     {
-        //
+       
+            FormasiPendidikan::find($id)->delete();
+        // dd($request->level);
+
+        return redirect()->route('formasipendidikan-list')->with('success', 'Post created successfully.');
     }
 }
