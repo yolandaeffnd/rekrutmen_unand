@@ -48,7 +48,7 @@
             'sub-menu' => [
                 [
                     'name' => 'Periode Penerimaan',
-                    'url' => route('formasi.index'),
+                    'url' => route('periode-penerimaan.index'),
                     'url-open' => request()->is('apps/master/periode-penerimaan*') ? 'menu-open' : '',
                     'url-active' => request()->is('apps/master/periode-penerimaan*') ? 'active' : '',
                     'permissions' => ['master-formasi'],

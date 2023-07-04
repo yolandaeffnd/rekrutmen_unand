@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\DeveloperFeature\{RoleController, ArtisanController};
-use App\Http\Controllers\{FormasiController, RekrutmenCon, WebPageCon, JenisformasiController, NotifController, FormasiPendidikanController};
+use App\Http\Controllers\{FormasiController, RekrutmenCon, WebPageCon, JenisformasiController, NotifController, FormasiPendidikanController, PeriodeController};
 use App\Http\Controllers\Articles\{ArticleCategoriCon, ArticleCon};
 use App\Http\Controllers\GudangData\{AjaxCon};
 use App\Http\Controllers\Personal\{AkunController, ProfileController};
@@ -74,6 +74,8 @@ Route::group(['prefix' => 'apps'], function () {
         //ROLE TASK
         Route::resource('/manage/user', UserController::class)->middleware('can:manage-user');
         Route::resource('/master/formasi', FormasiController::class)->middleware('can:master-formasi');
+        //data periode penerimaan
+        Route::resource('/master/periode-penerimaan', PeriodeController::class)->middleware('can:master-formasi');
         //kelola data jenis formasi
         Route::get('/master/jenisformasi', [JenisformasiController::class, 'index'])->name('jenisformasi.index');
         Route::get('/master/jenisformasi-create', [JenisformasiController::class, 'create'])->name('jenisformasi-create');
