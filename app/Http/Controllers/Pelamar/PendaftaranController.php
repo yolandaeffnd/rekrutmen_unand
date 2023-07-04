@@ -323,6 +323,9 @@ class PendaftaranController extends Controller
                 'SURAT LAMARAN'         => $uploadDokumen->suratLamaran,
                 'SURAT PENGALAMAN'      => $uploadDokumen->suratPengalaman,
                 'SKCK'      => $uploadDokumen->skck,
+                'SURAT KETERANGAN SEHAT'         => $uploadDokumen->ketSehat,
+                'SURAT BEBAS NAPZA'      => $uploadDokumen->bsNapza,
+                'SURAT PERNYATAAN TIDAK TERLIBAT POLITIK'      => $uploadDokumen->nonPolitik,
             ],
 
 
@@ -407,6 +410,9 @@ class PendaftaranController extends Controller
                 'Surat Lamaran'         => $uploadDokumen->suratLamaran,
                 'Surat Pengalaman'      => $uploadDokumen->suratPengalaman,
                 'SKCK'      => $uploadDokumen->skck,
+                'SURAT KETERANGAN SEHAT'         => $uploadDokumen->ketSehat,
+                'SURAT BEBAS NAPZA'      => $uploadDokumen->bsNapza,
+                'SURAT PERNYATAAN TIDAK TERLIBAT POLITIK'      => $uploadDokumen->nonPolitik,
             ],
         ];
 

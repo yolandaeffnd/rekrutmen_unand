@@ -25,20 +25,20 @@
                         <input type="submit" name="submit" class="btn btn-primary my-2" value="Cek Lamaran Saya">
                     </form>
                 @else
-                    <!-- <form action="{{ route('reg-start') }}" method="POST" id="form">
+                    <form action="{{ route('reg-start') }}" method="POST" id="form">
                         @csrf
                         <input type="submit" name="submit" class="btn btn-primary my-2"
                             value="Lengkapi Pendaftaran">
                     </form>
                     <br>
                     <br>
-                    <h5 class="text-danger"><b>Anda belum terdaftar</b>, silahkan isi lengkap formulir pendaftaran dengan klik tombol "Lengkapi Pendaftaran".</h5> -->
-              <!-- <form action="#">
+                    <h5 class="text-danger"><b>Anda belum terdaftar</b>, silahkan isi lengkap formulir pendaftaran dengan klik tombol "Lengkapi Pendaftaran".</h5>
+                <form action="#">
                         @csrf
                         <input type="submit" name="submit" class="btn btn-primary my-2"
                             value="Pendaftaran sudah ditutup">
                            
-                    </form> -->
+                    </form>
                     <h5 class="text-bold jobpost_name" style="color:#008000;">Pendaftaran sudah ditutup</h5>
                     <form action="{{ route('status-pelamar') }}" id="form">
                         @csrf
