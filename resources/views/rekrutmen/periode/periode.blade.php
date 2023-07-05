@@ -7,7 +7,7 @@
 @endpush
 
 @section('breadcrumbs')
-    {{ Breadcrumbs::render('formasi.index') }}
+    {{ Breadcrumbs::render('periode-penerimaan.index') }}
 @endsection
 
 @section('content')
@@ -31,7 +31,7 @@
                     </div>
                     <div class="card-body">
                         {{-- Get Data Periode --}}
-                        <p><a class="btn btn-info btn-xs">Tambah Periode</a></p>
+                        <p><a class="btn btn-info btn-xs" data-toggle="modal" data-target="#modal_input" onclick="clearform()">Tambah Periode</a></p>
 
                         <div class="table-responsive">
                             <table class="table">
@@ -51,9 +51,7 @@
                                                 <td>{{ $Periode->kode }}</td>
                                                 <td>{{ $Periode->name }}</td>
                                                 <td>
-                                                    <a href="{{ route('user.edit', $Periode['id']) }}"
-                                                        class="btn btn-warning btn-xs"> <i
-                                                            class="far fa-edit icon-size"></i></a>
+                                                    <a class="btn btn-warning btn-xs edit" data-kode="{{ $Periode->kode }}" data-name="{{ $Periode->name }}"> <i class="far fa-edit icon-size"></i></a>
 
                                                     {!! Form::open(['method' => 'DELETE', 'route' => ['periode-penerimaan.destroy', $Periode->id], 'style' => 'display:inline']) !!}
                                                     {!! Form::hidden('level', $Periode->level) !!}
@@ -85,6 +83,52 @@
             </div>
         </div>
     </div>
+  
+    <!-- Modal -->
+    <div class="modal fade" id="modal_input" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="title">Input Data Periode</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('periode-penerimaan.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label">Kode</label>
+                        <input type="text" id="kode" name="kode" class="form-control form-control-sm" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nama</label>
+                        <input type="text" id="name" name="name" class="form-control form-control-sm">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Tahun</label>
+                        <select class="form-control" id="tahun" name="tahun">
+                            <option value="">Pilih Tahun</option>
+                            <?php
+                            $startYear = date("Y")-5; // Tahun awal
+                            $endYear = date("Y")+1; // Tahun saat ini
+
+                            for ($year = $endYear; $year >= $startYear; $year--) {
+                                echo "<option value='$year'>$year</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <input type="submit" name="submit" value="Save" class="btn btn-primary">
+            </div>
+        </form>
+        </div>
+        </div>
+    </div>
+
 @endsection
 
 @push('custom-js')
@@ -106,5 +150,27 @@
                     }
                 });
         });
+
+        $(document).on('click', '.edit', function () {
+            kode = $(this).data('kode');
+            name = $(this).data('name');
+            th = kode.toString();
+            tahun = th.substring(0, 4)
+
+            $('#modal_input').modal('show');
+            $('#kode').val(kode)
+            $('#name').val(name)
+            $('#tahun').val(tahun)
+            $('#tahun').prop('disabled', true)
+            $('#title').html('Edit Data Periode')
+        });
+
+        function clearform() {
+            $('#kode').val('')
+            $('#name').val('')
+            $('#tahun').val('')
+            $('#tahun').prop('disabled', false)
+            $('#title').html('Input Data Periode')
+        }
     </script>
 @endpush

@@ -58,3 +58,8 @@ Breadcrumbs::for('role.edit', function (BreadcrumbTrail $trail, $role) {
 Breadcrumbs::for('formasi.index', function ($trail) {
     $trail->push('Formasi', route('formasi.index'));
 });
+
+Breadcrumbs::for('periode-penerimaan.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Master Data / Periode Penerimaan', route('periode-penerimaan.index').'?level='.request()->get('level'));
+});
