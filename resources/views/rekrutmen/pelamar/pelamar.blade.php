@@ -19,6 +19,20 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">List Pendaftaran</h3>
+                        <br><br>
+                        <form id="id-form-control" method="POST">
+                            @csrf
+                            <div class='grid-status'>
+                            <select class="form-control" name=status>
+                                <option selected="selected" disabled hidden>-- Selected Release --</option>
+                                @foreach($test as $i)
+                                <option value="{{$i->jabatan}}">{{$i->jabatan}}</option>
+                                @endforeach
+                            </select>
+                            <div></div>
+                            <input class="btn btn-primary" type="submit" name="submit" value="Apply">
+                            </div>  
+                        </form>
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -45,6 +59,7 @@
                                         <th scope="col">Waktu Submit</th>
                                         <th scope="col">Formasi</th>
                                         <th scope="col">Act</th>
+                                        <th scope="col">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,8 +94,14 @@
                                                 <td><b>{!! $stat_reg !!}</b></td>
                                                 <td><b>{!! $stat_reg_time !!}</b></td>
                                                 <td>{{ !is_null($user->units) ? $user->units->name : '-' }}</td>
-
                                                 <td>-</td>
+                                                @if($user->status == "Tidak Lulus")
+                                                <td style="background-color: red;color: white">{{$user->status}}</td>
+                                                @elseif($user->status == "Lulus")
+                                                <td style="background-color: green;color: white">{{$user->status}}</td>
+                                                @else
+                                                <td style="background-color: blue;color: white">{{$user->status}}</td>
+                                                @endif
                                             </tr>
                                         @endforeach
                                     @else

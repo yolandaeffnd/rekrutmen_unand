@@ -105,6 +105,7 @@ Route::group(['prefix' => 'apps'], function () {
         //kelola pelamar
         Route::resource('/rekrutmen/pelamar', RekrutmenCon::class)->middleware('can:rekrutmen-pelamar');
         Route::get('/rekrutmen/datatable/pelamar', [RekrutmenCon::class, 'index_datatable'])->name('pelamar.datatable');
+        Route::post('/rekrutmen/pelamar', [RekrutmenCon::class, 'update_status'])->name('update_status');
         Route::post('/rekrutmen/zip/pelamar', [RekrutmenCon::class, 'zipCreate'])->name('compress-files');
        
         //kelola artikel/berita/pengumuman

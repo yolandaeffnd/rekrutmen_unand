@@ -31,11 +31,36 @@
                         Username : {{ $user->username }}<br>
                         Email : {{ $user->email }}<br>
                         Level : {{ $user->level }}<br>
-                        Role :
+                        Role : <br>
+                        <div id='statusUser'>Status : {{ $user->status }}</div>
+
                         @foreach ($user->getRoleNames() as $roleName)
                             <li> <span class="badge bg-primary">{{ $roleName }}</span> </li>
                         @endforeach
                         <br>
+                        
+                        <div>
+                        <form action="{{route('pelamar.update',$user->id)}}" id="id-form-control" method="POST">
+                            @csrf
+                            @method('put')
+                            <div class='grid-status'>
+                            <select class="form-control" name="status">
+                                @foreach($hasilFormasi as $i)
+                                    <option value='{{$i}}'>{{$i}}</option>
+                                @endforeach
+                            </select>
+                            <div></div>
+                            <input class="btn btn-primary" type="submit" name="submit" value="Apply">
+                            </div>
+                        </form>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+                        <script type="text/javascript"> 
+                            let text = document.getElementById("statusUser").textContent;
+                            if(text.includes("Lulus") || text.includes("Tidak Lulus")){
+                                const element = document.getElementById("id-form-control").remove();
+                            }
+                        </script>
+                        </div>
                         <br>
 
                         <table class="table table-hover">
